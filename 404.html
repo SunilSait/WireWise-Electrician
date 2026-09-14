@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page not found — WireWise Electrician. Return to our home page or explore our services.">
+  <title>404 — Page Not Found | WireWise</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23F59E0B'/%3E%3Cpath d='M22 8 L14 20 H20 L17 32 L28 18 H22 L26 8 Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .error-wire{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+    .error-wire svg{width:100%;height:100%;}
+    @keyframes wire-anim{0%,100%{stroke-dashoffset:0;}50%{stroke-dashoffset:-120;}}
+    .w-path{stroke-dasharray:60 300;animation:wire-anim 8s ease-in-out infinite;}
+    .w-path-2{stroke-dasharray:40 400;animation:wire-anim 12s ease-in-out infinite reverse;}
+  </style>
+</head>
+<body>
+<div class="error-wire" aria-hidden="true">
+  <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none">
+    <path class="w-path" d="M0 300 L200 200 L400 350 L600 150 L800 300 L1000 100 L1200 280 L1440 200" stroke="rgba(var(--primary-rgb),0.15)" stroke-width="2"/>
+    <path class="w-path-2" d="M0 600 L300 500 L500 650 L700 450 L900 580 L1100 420 L1300 560 L1440 480" stroke="rgba(var(--primary-rgb),0.1)" stroke-width="2"/>
+  </svg>
+</div>
+
+<div class="error-page" role="main">
+  <div style="position:absolute;top:1.5rem;left:50%;transform:translateX(-50%)">
+    <a href="index.html" aria-label="WireWise Home" style="display:inline-flex;align-items:center;gap:0.625rem;text-decoration:none">
+      <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
+        <rect width="40" height="40" rx="10" fill="var(--primary)"/>
+        <path d="M22 8 L14 20 H20 L17 32 L28 18 H22 L26 8 Z" fill="white"/>
+      </svg>
+      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.0625rem;color:var(--text-dark)">Wire<span style="color:var(--primary)">Wise</span></span>
+    </a>
+  </div>
+
+  <div class="error-page-inner">
+    <div class="error-code" aria-hidden="true">404</div>
+    <div class="error-content">
+      <div class="error-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <h1>Circuit Broken!</h1>
+      <p>The page you're looking for has gone dark. Don't worry — our team is always ready to help. Navigate back to safety using the links below.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem">
+        <a href="index.html" class="btn btn-primary btn-lg" id="error-home-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Back to Home
+        </a>
+        <a href="contact.html" class="btn btn-secondary btn-lg" id="error-contact-btn">Contact Us</a>
+      </div>
+      <!-- Quick links -->
+      <div style="border-top:1px solid var(--border);padding-top:2rem">
+        <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:1.25rem;font-weight:400">Or explore these pages:</p>
+        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap">
+          <a href="services.html" class="area-chip" id="error-services-link">Services</a>
+          <a href="pricing.html" class="area-chip" id="error-pricing-link">Pricing</a>
+          <a href="emergency.html" class="area-chip" id="error-emergency-link">Emergency</a>
+          <a href="login.html" class="area-chip" id="error-login-link">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

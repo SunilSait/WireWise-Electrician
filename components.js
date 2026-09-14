@@ -1,0 +1,226 @@
+// WireWise — components.js
+// Shared navbar and footer injected into every page
+
+(function () {
+  // ── SVG Logo Mark ─────────────────────────────────────
+  const logoSVG = `<svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="40" height="40" rx="10" fill="var(--primary)"/>
+    <path d="M22 8 L14 20 H20 L17 32 L28 18 H22 L26 8 Z" fill="white"/>
+  </svg>`;
+
+  // ── Navbar HTML ───────────────────────────────────────
+  const navbarHTML = `
+  <nav class="navbar" id="main-navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo" aria-label="WireWise Home">
+        ${logoSVG}
+        <span class="logo-text">Wire<span>Wise</span></span>
+      </a>
+
+      <ul class="navbar-nav" role="navigation" aria-label="Main navigation">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="home2.html" class="nav-link">Home 2</a></li>
+        <li><a href="services.html" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+        <li><a href="emergency.html" class="nav-link">Emergency</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <!-- Theme palette toggle -->
+        <div class="palette-dropdown-wrap">
+          <button class="icon-btn" id="palette-toggle-btn" aria-label="Change theme accent" title="Theme Color Palette">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
+            </svg>
+          </button>
+          <div class="palette-dropdown" id="palette-dropdown">
+            <div class="palette-title">Theme Accent</div>
+            <button class="palette-option active" data-color="amber" type="button">
+              <span class="palette-dot amber"></span> Volt Amber (Default)
+            </button>
+            <button class="palette-option" data-color="cyan" type="button">
+              <span class="palette-dot cyan"></span> Cyber Cyan
+            </button>
+            <button class="palette-option" data-color="emerald" type="button">
+              <span class="palette-dot emerald"></span> Emerald Surge
+            </button>
+            <button class="palette-option" data-color="crimson" type="button">
+              <span class="palette-dot crimson"></span> Crimson Spark
+            </button>
+            <button class="palette-option" data-color="blue" type="button">
+              <span class="palette-dot blue"></span> Cobalt Blue
+            </button>
+          </div>
+        </div>
+        <!-- RTL toggle -->
+        <button class="icon-btn" data-rtl-toggle aria-label="Toggle RTL layout" title="Toggle RTL">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 5h18M3 12h18M3 19h18"/>
+            <path d="M17 8l4 4-4 4"/>
+          </svg>
+        </button>
+        <!-- Dark mode toggle -->
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
+          <svg data-moon-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg data-sun-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+        <a href="emergency.html" class="btn btn-secondary btn-sm">Emergency</a>
+        <a href="contact.html" class="btn btn-primary btn-sm">Book Now</a>
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="home2.html" class="nav-link">Home 2</a>
+    <a href="services.html" class="nav-link">Services</a>
+    <a href="pricing.html" class="nav-link">Pricing</a>
+    <a href="emergency.html" class="nav-link">Emergency</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem;background:var(--surface-alt);border-radius:var(--radius-sm);margin:0.25rem 0;">
+      <span style="font-size:0.85rem;font-weight:600;color:var(--text-dark);">Theme Color:</span>
+      <div style="display:flex;gap:0.5rem;">
+        <button class="palette-option" data-color="amber" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Volt Amber"><span class="palette-dot amber"></span></button>
+        <button class="palette-option" data-color="cyan" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Cyber Cyan"><span class="palette-dot cyan"></span></button>
+        <button class="palette-option" data-color="emerald" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Emerald Surge"><span class="palette-dot emerald"></span></button>
+        <button class="palette-option" data-color="crimson" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Crimson Spark"><span class="palette-dot crimson"></span></button>
+        <button class="palette-option" data-color="blue" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Cobalt Blue"><span class="palette-dot blue"></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu-actions">
+      <a href="emergency.html" class="btn btn-secondary">Emergency</a>
+      <a href="contact.html" class="btn btn-primary">Book Now</a>
+    </div>
+  </div>`;
+
+  // ── Footer HTML ───────────────────────────────────────
+  const footerHTML = `
+  <footer class="footer" id="main-footer">
+    <div class="footer-inner">
+      <div class="footer-brand footer-col">
+        <a href="index.html" class="navbar-logo" style="margin-bottom:0.5rem">
+          ${logoSVG}
+          <span class="logo-text">Wire<span>Wise</span></span>
+        </a>
+        <p class="footer-tagline">Your trusted residential electricians. Licensed, insured, and available 24/7 for all your home wiring and electrical needs.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="services.html">Home Wiring</a></li>
+          <li><a href="services.html">Circuit Breaker</a></li>
+          <li><a href="services.html">Lighting Fitting</a></li>
+          <li><a href="services.html">Fan Installation</a></li>
+          <li><a href="services.html">Panel Upgrades</a></li>
+          <li><a href="services.html">Switchboard Repair</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="home2.html">Home 2</a></li>
+          <li><a href="pricing.html">Pricing Guide</a></li>
+          <li><a href="emergency.html">Emergency Service</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="coming-soon.html">Coming Soon</a></li>
+          <li><a href="404.html">404 Page</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 5.18 5.18l1-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>+1 (800) 555-WIRE</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>info@wirewise.com</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>123 Main Street, New York, NY 10001</span>
+        </div>
+        <div class="footer-contact-item" style="margin-top:0.25rem">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Mon–Sat: 8am–8pm | Emergency: 24/7</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span id="footer-year">2026</span> WireWise Electrical Services. All rights reserved.</span>
+      <div class="footer-bottom-links">
+        <a href="coming-soon.html">Privacy Policy</a>
+        <a href="coming-soon.html">Terms of Service</a>
+        <a href="404.html">Sitemap</a>
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+  </footer>`;
+
+  // ── Inject on DOM ready ───────────────────────────────
+  const navContainer = document.getElementById('navbar-container');
+  if (navContainer) navContainer.innerHTML = navbarHTML;
+
+  const footerContainer = document.getElementById('footer-container');
+  if (footerContainer) footerContainer.innerHTML = footerHTML;
+
+  // Update footer year
+  const yr = document.getElementById('footer-year');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  // Inject scroll progress bar
+  if (!document.getElementById('scroll-progress')) {
+    const bar = document.createElement('div');
+    bar.className = 'scroll-progress-bar';
+    bar.id = 'scroll-progress';
+    document.body.prepend(bar);
+  }
+
+  // Inject back to top button
+  if (!document.getElementById('back-to-top')) {
+    const btt = document.createElement('button');
+    btt.className = 'back-to-top-btn';
+    btt.id = 'back-to-top';
+    btt.setAttribute('aria-label', 'Back to top');
+    btt.setAttribute('title', 'Back to top');
+    btt.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>`;
+    document.body.appendChild(btt);
+  }
+
+})();
+

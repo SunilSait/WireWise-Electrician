@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="WireWise Premium — Discover our full range of electrical services with expert team, process timeline, and safety certifications. Book your service today.">
+  <title>WireWise Premium | Electrician & Home Wiring</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23F59E0B'/%3E%3Cpath d='M22 8 L14 20 H20 L17 32 L28 18 H22 L26 8 Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Home 2 — Centered full-screen hero & slider */
+    .hero2{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--secondary);}
+    .hero2-slider{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
+    .hero2-slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;visibility:hidden;transition:opacity 1s cubic-bezier(0.4,0,0.2,1);overflow:hidden;}
+    .hero2-slide img{width:100%;height:100%;object-fit:cover;opacity:0.4;transform:scale(1.06);transition:transform 6s ease-out;}
+    .hero2-slide.active{opacity:1;visibility:visible;}
+    .hero2-slide.active img{transform:scale(1);}
+    .hero2-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,17,32,0.65) 0%,rgba(11,17,32,0.85) 100%);z-index:1;}
+    /* electric SVG line accent */
+    .hero2-elec{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+    .hero2-content{position:relative;z-index:3;max-width:800px;padding:2rem 1.5rem;}
+    .hero2-title{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(2.6rem,5.5vw,4.5rem);color:#fff;line-height:1.08;margin-bottom:1.5rem;}
+    .hero2-title span{color:var(--primary-light);}
+    .hero2-sub{font-size:1.125rem;color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 2.25rem;font-weight:400;line-height:1.75;}
+    .hero2-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .hero2-slider-controls{position:absolute;bottom:2.25rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:0.75rem;background:rgba(11,17,32,0.8);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-full);padding:0.4rem 0.85rem;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+    .hero2-slider-dots{display:flex;align-items:center;gap:0.5rem;}
+
+    /* Feature highlight */
+    .feature-highlight{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    @media(max-width:1023px){.feature-highlight{grid-template-columns:1fr;gap:2.5rem;}}
+    .fh-img{border-radius:var(--radius-2xl);overflow:hidden;aspect-ratio:3/4;box-shadow:var(--shadow-lg);position:relative;}
+    .fh-img img{width:100%;height:100%;object-fit:cover;}
+    .fh-stat-pill{position:absolute;bottom:2rem;left:2rem;right:2rem;background:rgba(11,17,32,0.85);backdrop-filter:blur(12px);border:1px solid rgba(var(--primary-rgb),0.35);border-radius:var(--radius-md);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+    .fh-stat{text-align:center;flex:1;}
+    .fh-stat-n{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;display:block;}
+    .fh-stat-l{font-size:0.75rem;color:rgba(255,255,255,0.5);font-weight:400;}
+    .fh-divider{width:1px;height:36px;background:rgba(255,255,255,0.15);}
+    .feature-list{display:flex;flex-direction:column;gap:1.75rem;}
+    .feature-item{display:flex;align-items:flex-start;gap:1.25rem;}
+    .feature-icon{width:52px;height:52px;border-radius:var(--radius-md);background:var(--primary-bg);border:1.5px solid rgba(var(--primary-rgb),0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .feature-icon svg{width:24px;height:24px;stroke:var(--primary);fill:none;}
+    .feature-item-content h4{font-weight:600;margin-bottom:0.375rem;}
+    .feature-item-content p{font-size:0.9375rem;color:var(--text-muted);font-weight:400;line-height:1.65;}
+
+    /* Cert cards staggered */
+    .cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    @media(max-width:767px){.cert-grid{grid-template-columns:1fr;}}
+    @media(max-width:1023px) and (min-width:768px){.cert-grid{grid-template-columns:1fr 1fr;}}
+    .cert-card{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;transition:var(--transition);}
+    .cert-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--primary);}
+    .cert-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:var(--primary);opacity:0.18;position:absolute;top:-0.5rem;right:1rem;}
+    .cert-card-inner{position:relative;}
+    .cert-icon{width:44px;height:44px;border-radius:var(--radius-sm);background:var(--primary-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .cert-icon svg{width:22px;height:22px;stroke:var(--primary);fill:none;}
+    .cert-name{font-weight:600;font-size:0.9375rem;color:var(--text-dark);margin-bottom:0.25rem;}
+    .cert-desc{font-size:0.85rem;color:var(--text-muted);font-weight:400;}
+
+    /* Blog section identical to shared */
+    /* Stacked testimonial */
+    .testimonial-stack{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem;}
+    .testimonial-stacked{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;transition:var(--transition);}
+    .testimonial-stacked:hover{box-shadow:var(--shadow-md);}
+    .ts-avatar{width:54px;height:54px;border-radius:50%;background:var(--primary-bg);border:2px solid var(--primary);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--primary);flex-shrink:0;}
+    .ts-content{}
+    .ts-name{font-weight:600;color:var(--text-dark);}
+    .ts-role{font-size:0.8rem;color:var(--text-muted);font-weight:400;margin-bottom:0.75rem;}
+    .ts-quote{font-size:0.9375rem;color:var(--text-body);font-style:italic;line-height:1.7;font-weight:400;}
+    .ts-stars{display:flex;gap:2px;margin-bottom:0.5rem;}
+    .ts-stars svg{width:14px;height:14px;fill:var(--accent-yellow);stroke:var(--accent-yellow);}
+
+    /* Emergency CTA band */
+    .emergency-band{background:var(--accent-red);padding:3rem 1.5rem;text-align:center;}
+    .emergency-band h2{color:#fff;font-weight:600;margin-bottom:0.75rem;}
+    .emergency-band p{color:rgba(255,255,255,0.8);max-width:500px;margin:0 auto 1.75rem;font-weight:400;}
+    .emergency-band .btn-white:hover{background:rgba(255,255,255,0.15);color:#fff;}
+  </style>
+</head>
+<body>
+<div id="navbar-container"></div>
+
+<!-- ===== HERO 2 — Full-screen centered ===== -->
+<section class="hero2" aria-label="Hero section" id="hero2-section">
+  <canvas id="hero-spark-canvas" class="hero-spark-canvas"></canvas>
+  <div class="ambient-glow-orb" style="top:25%;left:25%;width:420px;height:420px;"></div>
+
+  <!-- Hero 2 3-Image Background Slider (5s Transition) -->
+  <div class="hero2-slider" id="hero2-slider">
+    <div class="hero2-slide active" data-slide-index="0">
+      <img src="assets/hero_home2.jpg" alt="WireWise electrician team wiring a luxury home" loading="eager">
+    </div>
+    <div class="hero2-slide" data-slide-index="1">
+      <img src="assets/hero_home.jpg" alt="Professional WireWise electrician working on residential electrical panel" loading="lazy">
+    </div>
+    <div class="hero2-slide" data-slide-index="2">
+      <img src="assets/team_work.jpg" alt="WireWise certified residential electrician team on-site" loading="lazy">
+    </div>
+  </div>
+
+  <div class="hero2-overlay"></div>
+  <!-- Electric line SVG decoration -->
+  <div class="hero2-elec" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none">
+      <path d="M-100 450 L200 280 L380 400 L520 200 L700 350 L900 100 L1100 320 L1300 180 L1540 400" stroke="rgba(var(--primary-rgb),0.2)" stroke-width="2" stroke-dasharray="8 4"/>
+      <path d="M-100 600 L150 480 L350 550 L600 380 L800 500 L1050 300 L1250 450 L1540 320" stroke="rgba(var(--primary-rgb),0.15)" stroke-width="1.5" stroke-dasharray="12 6"/>
+      <circle cx="380" cy="400" r="4" fill="rgba(var(--primary-rgb),0.5)"/>
+      <circle cx="700" cy="350" r="4" fill="rgba(var(--primary-rgb),0.5)"/>
+      <circle cx="1100" cy="320" r="4" fill="rgba(var(--primary-rgb),0.5)"/>
+    </svg>
+  </div>
+  <div class="hero2-content">
+    <div class="hero-badge electric-pulse" style="margin:0 auto 1.5rem">
+      <span class="hero-badge-dot"></span>
+      Premium Electrical Service — Est. 2004
+    </div>
+    <h1 class="hero2-title">The <span class="gradient-accent">Smarter Way</span> to Power Your Home</h1>
+    <p class="hero2-sub">WireWise delivers premium residential electrical solutions with unmatched precision, safety, and customer care. From first call to final inspection — we exceed expectations.</p>
+    <div class="hero2-btns">
+      <a href="contact.html" class="btn btn-primary btn-lg" id="hero2-book-btn">Get Free Quote</a>
+      <a href="emergency.html" class="btn btn-outline-white btn-lg" id="hero2-emergency-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.08.96.26 1.9.55 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 5.18 5.18l1-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.47 2.81.55A2 2 0 0 1 22 16.92z"/></svg>
+        24/7 Emergency
+      </a>
+    </div>
+  </div>
+
+  <!-- Slider Controls & 5-Second Indicators for Hero 2 -->
+  <div class="hero2-slider-controls" aria-label="Hero slider navigation">
+    <button class="slider-arrow slider-prev" id="hero2-slide-prev" aria-label="Previous slide" title="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <div class="hero-slider-dots" id="hero2-slider-dots" role="tablist" aria-label="Slide indicators">
+      <button class="slider-dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Slide 1 of 3" title="Slide 1">
+        <span class="slider-dot-progress"></span>
+      </button>
+      <button class="slider-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Slide 2 of 3" title="Slide 2">
+        <span class="slider-dot-progress"></span>
+      </button>
+      <button class="slider-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Slide 3 of 3" title="Slide 3">
+        <span class="slider-dot-progress"></span>
+      </button>
+    </div>
+    <button class="slider-arrow slider-next" id="hero2-slide-next" aria-label="Next slide" title="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ===== SERVICES MARQUEE ===== -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Home Wiring</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/></svg>Circuit Breakers</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/></svg>Lighting Fitting</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/></svg>Fan Installation</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/></svg>Panel Upgrades</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4"/></svg>Switchboard Repair</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Safety Inspections</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/></svg>Outlet Upgrades</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>Home Wiring</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/></svg>Circuit Breakers</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/></svg>Lighting Fitting</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0"/></svg>Fan Installation</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/></svg>Panel Upgrades</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4"/></svg>Switchboard Repair</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Safety Inspections</div>
+    <div class="marquee-tag"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/></svg>Outlet Upgrades</div>
+  </div>
+</div>
+
+<!-- ===== FEATURE HIGHLIGHT ===== -->
+<section class="section" aria-labelledby="feature-heading">
+  <div class="container">
+    <div class="feature-highlight">
+      <div class="fh-img reveal-left">
+        <img src="assets/why_choose.jpg" alt="WireWise certified electricians planning a project">
+        <div class="fh-stat-pill">
+          <div class="fh-stat">
+            <span class="fh-stat-n">20+</span>
+            <span class="fh-stat-l">Years Active</span>
+          </div>
+          <div class="fh-divider"></div>
+          <div class="fh-stat">
+            <span class="fh-stat-n">5K+</span>
+            <span class="fh-stat-l">Homes Wired</span>
+          </div>
+          <div class="fh-divider"></div>
+          <div class="fh-stat">
+            <span class="fh-stat-n">50+</span>
+            <span class="fh-stat-l">Electricians</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <span class="section-label">Our Advantage</span>
+        <span class="divider-line"></span>
+        <h2 class="section-title" id="feature-heading">Why Homeowners Choose WireWise Over the Rest</h2>
+        <div class="feature-list" style="margin-top:2rem">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="feature-item-content">
+              <h4>State-Licensed & NEC Certified</h4>
+              <p>Every technician holds active state electrical licenses and NEC certifications, backed by $2M liability coverage.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="feature-item-content">
+              <h4>Fast & Flexible Scheduling</h4>
+              <p>Same-day appointments available. We work around your schedule — evenings and weekends at no extra charge.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="feature-item-content">
+              <h4>Upfront, Transparent Pricing</h4>
+              <p>Detailed written quotes before any work begins. The price we quote is the price you pay — no surprise invoices.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="feature-item-content">
+              <h4>Real-Time Job Tracking</h4>
+              <p>Track your electrician's ETA and job status via SMS updates from booking to completion.</p>
+            </div>
+          </div>
+        </div>
+        <a href="contact.html" class="btn btn-primary btn-lg" style="margin-top:2rem" id="feature-book-btn">Book a Service Today</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CERTIFICATIONS ===== -->
+<section class="section bg-surface-alt" aria-labelledby="cert-heading">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">Credentials</span>
+      <span class="divider-line"></span>
+      <h2 class="section-title" id="cert-heading">Safety Certifications & Accreditations</h2>
+      <p class="section-subtitle">Every certification we hold represents our commitment to the highest electrical safety standards.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card reveal delay-1">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">NEC Certified Electricians</div>
+          <div class="cert-desc">All work follows National Electrical Code standards — the benchmark for electrical safety in the US.</div>
+        </div>
+      </div>
+      <div class="cert-card reveal delay-2">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">OSHA Safety Compliance</div>
+          <div class="cert-desc">Our team is OSHA-trained and follows all federal workplace safety guidelines on every job site.</div>
+        </div>
+      </div>
+      <div class="cert-card reveal delay-3">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">BBB A+ Accreditation</div>
+          <div class="cert-desc">Proud recipients of the Better Business Bureau's highest rating for consistent service excellence.</div>
+        </div>
+      </div>
+      <div class="cert-card reveal delay-1">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">State Electrical License</div>
+          <div class="cert-desc">Fully licensed by the state Department of Buildings for residential electrical work.</div>
+        </div>
+      </div>
+      <div class="cert-card reveal delay-2">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">Background Checked Staff</div>
+          <div class="cert-desc">Every technician undergoes comprehensive background checks before joining our team.</div>
+        </div>
+      </div>
+      <div class="cert-card reveal delay-3">
+        <div class="cert-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+        </div>
+        <div>
+          <div class="cert-name">$2M Liability Insurance</div>
+          <div class="cert-desc">Comprehensive insurance coverage protects your home and our team throughout every project.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VERTICAL PROCESS TIMELINE ===== -->
+<section class="section" aria-labelledby="process2-heading">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">Our Process</span>
+      <span class="divider-line"></span>
+      <h2 class="section-title" id="process2-heading">How We Deliver Flawless Results</h2>
+      <p class="section-subtitle">A structured, transparent workflow that keeps you informed at every stage.</p>
+    </div>
+    <div style="max-width:680px;margin:0 auto">
+      <div class="timeline-vertical">
+        <div class="timeline-item reveal">
+          <div class="timeline-left">
+            <div class="timeline-num">1</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-right">
+            <h4>Initial Contact & Booking</h4>
+            <p>Reach out via phone, form, or online booking. We confirm your appointment within 30 minutes and send a technician profile so you know who's coming.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-left">
+            <div class="timeline-num">2</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-right">
+            <h4>Site Assessment & Free Quote</h4>
+            <p>Our electrician visits, evaluates your electrical system, identifies issues, and provides a detailed itemized written estimate — no charge, no obligation.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-left">
+            <div class="timeline-num">3</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-right">
+            <h4>Permit & Planning (if required)</h4>
+            <p>We handle all permit applications and coordinate with local inspectors. You get regular updates while we prepare everything needed for a smooth installation.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-left">
+            <div class="timeline-num">4</div>
+            <div class="timeline-line"></div>
+          </div>
+          <div class="timeline-right">
+            <h4>Professional Installation</h4>
+            <p>Our certified team executes the work using high-grade materials and professional tools. We protect your home with drop cloths and clean up everything when done.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-left">
+            <div class="timeline-num">5</div>
+          </div>
+          <div class="timeline-right">
+            <h4>Testing, Inspection & Sign-Off</h4>
+            <p>Every circuit is tested, every connection verified. We walk you through the completed work, answer any questions, and you only sign off when fully satisfied.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section class="section bg-surface-alt" aria-labelledby="team-heading">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">Meet the Team</span>
+      <span class="divider-line"></span>
+      <h2 class="section-title" id="team-heading">The Experts Behind Every Job</h2>
+      <p class="section-subtitle">Experienced, certified, and passionate about electrical safety and excellence.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal delay-1">
+        <div class="team-avatar">MR</div>
+        <div class="team-name">Marcus Reynolds</div>
+        <div class="team-role">Master Electrician</div>
+        <div class="team-bio">25+ years in residential electrical. NEC Master License holder and OSHA Safety Officer.</div>
+      </div>
+      <div class="team-card reveal delay-2">
+        <div class="team-avatar">LA</div>
+        <div class="team-name">Lisa Alonzo</div>
+        <div class="team-role">Panel Specialist</div>
+        <div class="team-bio">Expert in panel upgrades and load balancing. Certified with 12 years of field experience.</div>
+      </div>
+      <div class="team-card reveal delay-3">
+        <div class="team-avatar">DK</div>
+        <div class="team-name">David Kim</div>
+        <div class="team-role">Smart Home Tech</div>
+        <div class="team-bio">Specializes in smart lighting, EV chargers, and home automation wiring systems.</div>
+      </div>
+      <div class="team-card reveal delay-4">
+        <div class="team-avatar">PJ</div>
+        <div class="team-name">Priya Johnson</div>
+        <div class="team-role">Safety Inspector</div>
+        <div class="team-bio">Handles all final inspections and permit sign-offs. Licensed inspector with 10 years experience.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem" class="reveal">
+      <img src="assets/team_work.jpg" alt="Full WireWise electrician team in front of a completed home" style="width:100%;max-width:860px;border-radius:var(--radius-2xl);margin:0 auto;box-shadow:var(--shadow-lg);object-fit:cover;height:340px;">
+    </div>
+  </div>
+</section>
+
+<!-- ===== STACKED TESTIMONIALS ===== -->
+<section class="section" aria-labelledby="testi2-heading">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">Reviews</span>
+      <span class="divider-line"></span>
+      <h2 class="section-title" id="testi2-heading">What Our Clients Are Saying</h2>
+      <p class="section-subtitle">Hundreds of satisfied homeowners trust WireWise for all their electrical needs.</p>
+    </div>
+    <div class="testimonial-stack">
+      <div class="testimonial-stacked reveal delay-1">
+        <div class="ts-avatar">KC</div>
+        <div class="ts-content">
+          <div class="ts-name">Kevin Chen</div>
+          <div class="ts-role">Homeowner, Jersey City</div>
+          <div class="ts-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="ts-quote">"From quote to sign-off, the entire process was seamless. Marcus personally supervised my panel upgrade. Everything passed inspection on the first try. Absolutely outstanding!"</p>
+        </div>
+      </div>
+      <div class="testimonial-stacked reveal delay-2">
+        <div class="ts-avatar">AT</div>
+        <div class="ts-content">
+          <div class="ts-name">Amanda Torres</div>
+          <div class="ts-role">Homeowner, Long Island</div>
+          <div class="ts-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="ts-quote">"WireWise installed LED lighting in every room of our home. Lisa was incredibly knowledgeable and explained each step. The result looks like a magazine feature. Couldn't be happier."</p>
+        </div>
+      </div>
+      <div class="testimonial-stacked reveal delay-3">
+        <div class="ts-avatar">RW</div>
+        <div class="ts-content">
+          <div class="ts-name">Robert Williams</div>
+          <div class="ts-role">Property Manager, Manhattan</div>
+          <div class="ts-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="ts-quote">"I manage 12 residential units and WireWise is my go-to electrical contractor. Reliable, professional, and always code-compliant. Worth every penny — highly recommend to any property manager."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG TIPS ===== -->
+<section class="section bg-surface-alt" aria-labelledby="blog-heading">
+  <div class="container">
+    <div class="section-header center reveal">
+      <span class="section-label">Electrical Tips</span>
+      <span class="divider-line"></span>
+      <h2 class="section-title" id="blog-heading">Homeowner's Electrical Guide</h2>
+      <p class="section-subtitle">Practical advice from our certified electricians to keep your home safe.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card reveal delay-1">
+        <div class="blog-card-img">
+          <img src="assets/service_panel.jpg" alt="When to upgrade your electrical panel">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Safety</span>
+          <h3 class="blog-card-title">5 Signs Your Electrical Panel Needs an Upgrade</h3>
+          <p class="blog-card-desc">Frequent breaker trips, flickering lights, and burning smells are warning signs you shouldn't ignore.</p>
+          <div class="blog-card-meta">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            March 15, 2026
+          </div>
+        </div>
+      </div>
+      <div class="blog-card reveal delay-2">
+        <div class="blog-card-img">
+          <img src="assets/service_lighting.jpg" alt="LED lighting guide for homes">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Savings</span>
+          <h3 class="blog-card-title">How LED Lighting Can Cut Your Energy Bill by 40%</h3>
+          <p class="blog-card-desc">Switching from incandescent to LED fixtures is the single biggest energy-saving upgrade you can make.</p>
+          <div class="blog-card-meta">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            April 2, 2026
+          </div>
+        </div>
+      </div>
+      <div class="blog-card reveal delay-3">
+        <div class="blog-card-img">
+          <img src="assets/process_consult.jpg" alt="DIY vs professional electrical work">
+        </div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Guide</span>
+          <h3 class="blog-card-title">DIY Electrical vs. Hiring a Pro: What the Code Says</h3>
+          <p class="blog-card-desc">Some tasks are safe for homeowners; others require a licensed electrician by law. Here's the complete breakdown.</p>
+          <div class="blog-card-meta">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            May 10, 2026
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EMERGENCY CTA BAND ===== -->
+<section class="emergency-band" aria-labelledby="emrg-band-heading">
+  <div class="container">
+    <div class="reveal">
+      <h2 id="emrg-band-heading">Electrical Emergency? We're Here Right Now.</h2>
+      <p>Our 24/7 emergency crew is standing by. Don't wait — electrical emergencies are dangerous. Call us immediately.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="emergency.html" class="btn btn-white btn-lg" id="emrg-band-btn">Get Emergency Help</a>
+        <a href="tel:+18005559473" class="btn btn-outline-white btn-lg" id="emrg-call-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.08.96.26 1.9.55 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 5.18 5.18l1-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.47 2.81.55A2 2 0 0 1 22 16.92z"/></svg>
+          +1 (800) 555-WIRE
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-container"></div>
+<script src="components.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
