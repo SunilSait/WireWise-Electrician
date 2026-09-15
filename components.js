@@ -69,16 +69,49 @@
       </div>
     </div>
   </nav>
-  <!-- Mobile Menu -->
-  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="home2.html" class="nav-link">Home 2</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="pricing.html" class="nav-link">Pricing</a>
-    <a href="emergency.html" class="nav-link">Emergency</a>
-    <a href="contact.html" class="nav-link">Contact</a>
-    <div class="mobile-menu-actions">
-      <a href="login.html" class="btn btn-primary">Login</a>
+
+  <!-- Mobile Navigation Drawer Overlay (Reference Implementation) -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <a href="index.html" class="navbar-logo" aria-label="WireWise Home">
+        ${logoSVG}
+        <span class="logo-text">Wire<span>Wise</span></span>
+      </a>
+      <button class="mobile-drawer-close" id="mobile-drawer-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-drawer-body">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="home2.html" class="mobile-nav-link">Home 2</a>
+      <a href="services.html" class="mobile-nav-link">Services</a>
+      <a href="pricing.html" class="mobile-nav-link">Pricing</a>
+      <a href="emergency.html" class="mobile-nav-link">Emergency</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+    </div>
+
+    <div class="mobile-drawer-footer">
+      <a href="login.html" class="btn btn-primary btn-full">Login</a>
+      <div class="mobile-drawer-controls">
+        <button class="icon-btn-pill" data-rtl-toggle aria-label="Toggle RTL layout" title="Toggle RTL">
+          <span>LTR / RTL</span>
+        </button>
+        <button class="icon-btn" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
+          <svg data-moon-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg data-sun-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>`;
 
@@ -168,6 +201,71 @@
   // ── Inject on DOM ready ───────────────────────────────
   const navContainer = document.getElementById('navbar-container');
   if (navContainer) navContainer.innerHTML = navbarHTML;
+
+  // ── Mobile Drawer Controller ──────────────────────────
+  function initMobileDrawer() {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const drawer = document.getElementById('mobile-drawer');
+    const closeBtn = document.getElementById('mobile-drawer-close');
+    if (!drawer) return;
+
+    // Highlight active nav link in mobile drawer
+    let path = window.location.pathname.split('/').pop() || 'index.html';
+    if (!path || path === '/') path = 'index.html';
+    drawer.querySelectorAll('.mobile-nav-link').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === path) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      if (hamburgerBtn) {
+        hamburgerBtn.classList.add('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'true');
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      if (hamburgerBtn) {
+        hamburgerBtn.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      }
+      document.body.style.overflow = '';
+    }
+
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (drawer.classList.contains('open')) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeDrawer);
+    }
+
+    drawer.querySelectorAll('.mobile-nav-link, .mobile-drawer-footer a').forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
+  }
+
+  initMobileDrawer();
 
   const footerContainer = document.getElementById('footer-container');
   if (footerContainer) footerContainer.innerHTML = footerHTML;

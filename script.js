@@ -177,17 +177,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
         const targetIndex = parseInt(dot.getAttribute('data-slide'), 10);
-        if (!isNaN(targetIndex) && targetIndex !== currentIndex) {
+        if (!isNaN(targetIndex)) {
           goToSlide(targetIndex);
           startTimer();
         }
       });
     });
 
-    parentContainer.addEventListener('mouseenter', stopTimer);
-    parentContainer.addEventListener('mouseleave', startTimer);
+    if (controls) {
+      controls.addEventListener('mouseenter', stopTimer);
+      controls.addEventListener('mouseleave', startTimer);
+    }
 
     parentContainer.addEventListener('keydown', (e) => {
       if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
@@ -236,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initImageSlider({
     sliderId: 'hero2-slider',
     slideClass: '.hero2-slide',
-    dotSelector: '.hero2-slider-dots .slider-dot',
+    dotSelector: '#hero2-slider-dots .slider-dot, .hero2-slider-dots .slider-dot, .hero-slider-dots .slider-dot',
     prevBtnId: 'hero2-slide-prev',
     nextBtnId: 'hero2-slide-next',
     controlsSelector: '.hero2-slider-controls'

@@ -9,33 +9,45 @@
   <link rel="stylesheet" href="style.css">
   <style>
     /* Home 2 — Centered full-screen hero & slider */
-    .hero2{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--secondary);}
+    .hero2{min-height:calc(100vh - 71px);display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--secondary);}
     .hero2-slider{position:absolute;inset:0;width:100%;height:100%;z-index:0;}
-    .hero2-slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;visibility:hidden;transition:opacity 1s cubic-bezier(0.4,0,0.2,1);overflow:hidden;}
-    .hero2-slide img{width:100%;height:100%;object-fit:cover;opacity:0.4;transform:scale(1.06);transition:transform 6s ease-out;}
-    .hero2-slide.active{opacity:1;visibility:visible;}
+    .hero2-slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;visibility:hidden;transition:opacity 0.8s ease-in-out;overflow:hidden;}
+    .hero2-slide img{width:100%;height:100%;object-fit:cover;opacity:0.55;transform:scale(1.06);transition:transform 5s ease-out;}
+    .hero2-slide.active{opacity:1;visibility:visible;z-index:1;}
     .hero2-slide.active img{transform:scale(1);}
-    .hero2-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,17,32,0.65) 0%,rgba(11,17,32,0.85) 100%);z-index:1;}
+    .hero2-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,17,32,0.5) 0%,rgba(11,17,32,0.78) 100%);z-index:1;}
     /* electric SVG line accent */
     .hero2-elec{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
-    .hero2-content{position:relative;z-index:3;max-width:800px;padding:2rem 1.5rem;}
-    .hero2-title{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(2.6rem,5.5vw,4.5rem);color:#fff;line-height:1.08;margin-bottom:1.5rem;}
+    .hero2-content{position:relative;z-index:3;max-width:800px;padding:1.5rem 1.5rem;}
+    .hero2-title{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(2.4rem,5vw,4.2rem);color:#fff;line-height:1.1;margin-bottom:1.25rem;}
     .hero2-title span{color:var(--primary-light);}
-    .hero2-sub{font-size:1.125rem;color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 2.25rem;font-weight:400;line-height:1.75;}
+    .hero2-sub{font-size:1.0625rem;color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 1.75rem;font-weight:400;line-height:1.7;}
     .hero2-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-    .hero2-slider-controls{position:absolute;bottom:2.25rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:0.75rem;background:rgba(11,17,32,0.8);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-full);padding:0.4rem 0.85rem;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+    .hero2-slider-controls{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:0.75rem;background:rgba(11,17,32,0.8);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-full);padding:0.4rem 0.85rem;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
     .hero2-slider-dots{display:flex;align-items:center;gap:0.5rem;}
 
     /* Feature highlight */
-    .feature-highlight{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
-    @media(max-width:1023px){.feature-highlight{grid-template-columns:1fr;gap:2.5rem;}}
-    .fh-img{border-radius:var(--radius-2xl);overflow:hidden;aspect-ratio:3/4;box-shadow:var(--shadow-lg);position:relative;}
-    .fh-img img{width:100%;height:100%;object-fit:cover;}
-    .fh-stat-pill{position:absolute;bottom:2rem;left:2rem;right:2rem;background:rgba(11,17,32,0.85);backdrop-filter:blur(12px);border:1px solid rgba(var(--primary-rgb),0.35);border-radius:var(--radius-md);padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+    .feature-highlight{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .fh-img{border-radius:var(--radius-2xl);overflow:hidden;aspect-ratio:4/3;max-height:460px;box-shadow:var(--shadow-lg);position:relative;}
+    .fh-img img{width:100%;height:100%;object-fit:cover;object-position:center;}
+    .fh-stat-pill{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;background:rgba(11,17,32,0.88);backdrop-filter:blur(12px);border:1px solid rgba(var(--primary-rgb),0.35);border-radius:var(--radius-md);padding:0.85rem 1.25rem;display:flex;align-items:center;gap:1rem;}
     .fh-stat{text-align:center;flex:1;}
-    .fh-stat-n{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;color:#fff;display:block;}
-    .fh-stat-l{font-size:0.75rem;color:rgba(255,255,255,0.5);font-weight:400;}
-    .fh-divider{width:1px;height:36px;background:rgba(255,255,255,0.15);}
+    .fh-stat-n{font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;display:block;line-height:1.1;}
+    .fh-stat-l{font-size:0.75rem;color:rgba(255,255,255,0.6);font-weight:500;}
+    .fh-divider{width:1px;height:32px;background:rgba(255,255,255,0.15);}
+
+    @media(max-width:1023px){
+      .feature-highlight{grid-template-columns:1fr;gap:2.5rem;}
+      .fh-img{aspect-ratio:16/10;max-height:360px;max-width:600px;width:100%;margin:0 auto;}
+      .fh-stat-pill{bottom:1rem;left:1rem;right:1rem;padding:0.75rem 1rem;}
+      .fh-stat-n{font-size:1.2rem;}
+    }
+    @media(max-width:480px){
+      .fh-img{aspect-ratio:16/11;max-height:300px;}
+      .fh-stat-pill{padding:0.5rem 0.75rem;gap:0.5rem;}
+      .fh-stat-n{font-size:1.05rem;}
+      .fh-stat-l{font-size:0.7rem;}
+    }
     .feature-list{display:flex;flex-direction:column;gap:1.75rem;}
     .feature-item{display:flex;align-items:flex-start;gap:1.25rem;}
     .feature-icon{width:52px;height:52px;border-radius:var(--radius-md);background:var(--primary-bg);border:1.5px solid rgba(var(--primary-rgb),0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -49,7 +61,7 @@
     @media(max-width:1023px) and (min-width:768px){.cert-grid{grid-template-columns:1fr 1fr;}}
     .cert-card{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem;display:flex;align-items:flex-start;gap:1rem;transition:var(--transition);}
     .cert-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--primary);}
-    .cert-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;color:var(--primary);opacity:0.18;position:absolute;top:-0.5rem;right:1rem;}
+    .cert-num{font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:600;color:var(--primary);opacity:0.18;position:absolute;top:-0.5rem;right:1rem;}
     .cert-card-inner{position:relative;}
     .cert-icon{width:44px;height:44px;border-radius:var(--radius-sm);background:var(--primary-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .cert-icon svg{width:22px;height:22px;stroke:var(--primary);fill:none;}
@@ -125,11 +137,11 @@
   </div>
 
   <!-- Slider Controls & 5-Second Indicators for Hero 2 -->
-  <div class="hero2-slider-controls" aria-label="Hero slider navigation">
+  <div class="hero2-slider-controls hero-slider-controls" aria-label="Hero slider navigation">
     <button class="slider-arrow slider-prev" id="hero2-slide-prev" aria-label="Previous slide" title="Previous">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </button>
-    <div class="hero-slider-dots" id="hero2-slider-dots" role="tablist" aria-label="Slide indicators">
+    <div class="hero2-slider-dots hero-slider-dots" id="hero2-slider-dots" role="tablist" aria-label="Slide indicators">
       <button class="slider-dot active" data-slide="0" role="tab" aria-selected="true" aria-label="Slide 1 of 3" title="Slide 1">
         <span class="slider-dot-progress"></span>
       </button>
@@ -174,7 +186,7 @@
   <div class="container">
     <div class="feature-highlight">
       <div class="fh-img reveal-left">
-        <img src="assets/why_choose.jpg" alt="WireWise certified electricians planning a project">
+        <img src="assets/home2_why_choose.jpg" alt="WireWise certified electricians planning a project">
         <div class="fh-stat-pill">
           <div class="fh-stat">
             <span class="fh-stat-n">20+</span>
@@ -293,7 +305,7 @@
           <span class="cert-status-pill-v2 green">FEDERAL</span>
         </div>
         <h3 class="bento-card-title">OSHA 30 Safety Standard</h3>
-        <p class="bento-card-desc">30-Hour OSHA certified technicians practicing zero-hazard workplace protocols on every project.</p>
+        <p class="bento-card-desc">30-Hour OSHA certified technicians practicing zero-hazard workplace protocols.</p>
         <div class="bento-footer-tag">
           <span>Workplace Safety</span>
           <span>Zero Hazard</span>
@@ -308,7 +320,7 @@
           </div>
           <span class="cert-status-pill-v2 green">LICENSE</span>
         </div>
-        <h3 class="bento-card-title">State License & $2M Insurance</h3>
+        <h3 class="bento-card-title">State License & $2M</h3>
         <p class="bento-card-desc">Fully bonded with $2,000,000 general liability coverage for complete peace of mind.</p>
         <div class="bento-footer-tag">
           <span>License #EC-984021</span>
@@ -451,91 +463,28 @@
         <div class="team-avatar">LA</div>
         <div class="team-name">Lisa Alonzo</div>
         <div class="team-role">Panel Specialist</div>
-        <div class="team-bio">Expert in panel upgrades and load balancing. Certified with 12 years of field experience.</div>
+        <div class="team-bio">Expert in panel upgrades and load balancing. Certified with the 12 years of field experience.</div>
       </div>
       <div class="team-card reveal delay-3">
         <div class="team-avatar">DK</div>
         <div class="team-name">David Kim</div>
         <div class="team-role">Smart Home Tech</div>
-        <div class="team-bio">Specializes in smart lighting, EV chargers, and home automation wiring systems.</div>
+        <div class="team-bio">Specializes in smart lighting system, EV chargers, and home automation wiring systems.</div>
       </div>
       <div class="team-card reveal delay-4">
         <div class="team-avatar">PJ</div>
         <div class="team-name">Priya Johnson</div>
         <div class="team-role">Safety Inspector</div>
-        <div class="team-bio">Handles all final inspections and permit sign-offs. Licensed inspector with 10 years experience.</div>
+        <div class="team-bio">Handles all final inspections and permit sign-offs. Licensed inspector with 10 years exp.</div>
       </div>
     </div>
     <div style="text-align:center;margin-top:2.5rem" class="reveal">
-      <img src="assets/team_work.jpg" alt="Full WireWise electrician team in front of a completed home" style="width:100%;max-width:860px;border-radius:var(--radius-2xl);margin:0 auto;box-shadow:var(--shadow-lg);object-fit:cover;height:340px;">
+      <img src="assets/team_group.jpg" alt="Full WireWise electrician team in front of a completed home" style="width:100%;max-width:860px;border-radius:var(--radius-2xl);margin:0 auto;box-shadow:var(--shadow-lg);object-fit:cover;height:340px;">
     </div>
   </div>
 </section>
 
-<!-- ===== FAST RESPONSE & EMERGENCY GUARANTEE (V3 NETWORK HUB) ===== -->
-<section class="section fr-section-v3 bg-surface-alt" aria-labelledby="fast-response2-heading">
-  <div class="container">
-    <div class="fr-hub-v3 reveal">
-      <div class="fr-hub-grid">
-        <!-- Left Hero Area -->
-        <div>
-          <div class="fr-sonar-badge">
-            <span class="fr-sonar-ring"></span>
-            24/7 RAPID DISPATCH NETWORK
-          </div>
-          <h2 class="fr-hub-title" id="fast-response2-heading">24/7 Emergency Fleet & Rapid Dispatch</h2>
-          <p class="fr-hub-desc">Electrical hazards can't wait. Our mobile service vans are strategically stationed across the metro area to guarantee an electrician at your door in under 45 minutes.</p>
 
-          <div class="fr-hub-ctas">
-            <a href="emergency.html" class="btn btn-danger btn-lg fr-dispatch-btn">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-              Dispatch Emergency Unit
-            </a>
-            <a href="contact.html" class="btn btn-outline-white btn-lg fr-hotline-btn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.08.96.26 1.9.55 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 5.18 5.18l1-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.47 2.81.55A2 2 0 0 1 22 16.92z"/></svg>
-              Call Hotline: (800) 555-WIRE
-            </a>
-          </div>
-        </div>
-
-        <!-- Right 2x2 Feature Matrix Grid -->
-        <div class="fr-quad-grid">
-          <div class="fr-quad-card">
-            <div class="fr-quad-icon">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.08.96.26 1.9.55 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 5.18 5.18l1-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.47 2.81.55A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <h4>Instant Tech Line</h4>
-            <p>Direct line to on-duty master electricians with zero automated hold loops.</p>
-          </div>
-
-          <div class="fr-quad-card">
-            <div class="fr-quad-icon">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
-            </div>
-            <h4>Live GPS Van Radar</h4>
-            <p>Receive SMS link with real-time vehicle location and arrival map.</p>
-          </div>
-
-          <div class="fr-quad-card">
-            <div class="fr-quad-icon">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            </div>
-            <h4>500+ OEM Parts Van</h4>
-            <p>Fully stocked mobile workshop carrying parts for same-day repair.</p>
-          </div>
-
-          <div class="fr-quad-card">
-            <div class="fr-quad-icon">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h4>Upfront Flat Rate</h4>
-            <p>Clear itemized pricing before any work begins — zero hidden fees.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ===== STACKED TESTIMONIALS ===== -->
 <section class="section" aria-labelledby="testi2-heading">
@@ -609,7 +558,7 @@
     <div class="blog-grid">
       <div class="blog-card reveal delay-1">
         <div class="blog-card-img">
-          <img src="assets/service_panel.jpg" alt="When to upgrade your electrical panel">
+          <img src="assets/blog_panel_upgrade.jpg" alt="When to upgrade your electrical panel">
         </div>
         <div class="blog-card-body">
           <span class="blog-tag">Safety</span>
@@ -623,7 +572,7 @@
       </div>
       <div class="blog-card reveal delay-2">
         <div class="blog-card-img">
-          <img src="assets/service_lighting.jpg" alt="LED lighting guide for homes">
+          <img src="assets/blog_lighting_guide.jpg" alt="LED lighting guide for homes">
         </div>
         <div class="blog-card-body">
           <span class="blog-tag">Savings</span>
@@ -635,14 +584,14 @@
           </div>
         </div>
       </div>
-      <div class="blog-card reveal delay-3">
+      <div class="blog-card blog-last-card reveal delay-3">
         <div class="blog-card-img">
-          <img src="assets/process_consult.jpg" alt="DIY vs professional electrical work">
+          <img src="assets/blog_diy_pro.jpg" alt="DIY vs professional electrical work">
         </div>
         <div class="blog-card-body">
           <span class="blog-tag">Guide</span>
           <h3 class="blog-card-title">DIY Electrical vs. Hiring a Pro: What the Code Says</h3>
-          <p class="blog-card-desc">Some tasks are safe for homeowners; others require a licensed electrician by law. Here's the complete breakdown.</p>
+          <p class="blog-card-desc">Some tasks are safe for homeowners; others require a licensed electrician by law.</p>
           <div class="blog-card-meta">
             <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             May 10, 2026
@@ -653,18 +602,30 @@
   </div>
 </section>
 
-<!-- ===== EMERGENCY CTA BAND ===== -->
-<section class="emergency-band" aria-labelledby="emrg-band-heading">
+<!-- ===== 24/7 EMERGENCY COMMAND HUB ===== -->
+<section class="home2-emergency-hub" aria-labelledby="emrg-band-heading">
   <div class="container">
-    <div class="reveal">
-      <h2 id="emrg-band-heading">Electrical Emergency? We're Here Right Now.</h2>
-      <p>Our 24/7 emergency crew is standing by. Don't wait — electrical emergencies are dangerous. Call us immediately.</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-        <a href="emergency.html" class="btn btn-white btn-lg" id="emrg-band-btn">Get Emergency Help</a>
-        <a href="tel:+18005559473" class="btn btn-outline-white btn-lg" id="emrg-call-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.08.96.26 1.9.55 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 5.18 5.18l1-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.47 2.81.55A2 2 0 0 1 22 16.92z"/></svg>
-          +1 (800) 555-WIRE
-        </a>
+    <div class="home2-emergency-box reveal">
+      <div>
+        <div class="emrg-pulse-badge">
+          <span class="emrg-radar-dot"></span>
+          24/7 RAPID DISPATCH · AVG ETA &lt; 45 MIN
+        </div>
+        <h2 class="emrg-hub-title" id="emrg-band-heading">Electrical Emergency? <span>We're Here Right Now.</span></h2>
+        <p class="emrg-hub-desc">Our mobile emergency service vans are stationed across the metro area. Don't wait or risk shock hazards — master electricians are standing by 24/7/365.</p>
+
+        <div class="emrg-btns-wrap">
+          <a href="emergency.html" class="btn btn-danger btn-lg" id="emrg-band-btn">Dispatch Emergency Unit Now →</a>
+          <a href="tel:+18005559473" class="btn btn-outline-white btn-lg" id="emrg-book-btn">Call +1 (800) 555-WIRE</a>
+        </div>
+      </div>
+
+      <div class="emrg-van-frame">
+        <img src="assets/home2_emergency_unit.jpg" alt="WireWise Mobile Emergency Unit Service Van Stationed Nearby">
+        <div class="emrg-radar-tag">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+          Mobile Unit #04 On Standby
+        </div>
       </div>
     </div>
   </div>
