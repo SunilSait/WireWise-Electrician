@@ -97,8 +97,10 @@
     <div class="mobile-drawer-footer">
       <a href="login.html" class="btn btn-primary btn-full">Login</a>
       <div class="mobile-drawer-controls">
-        <button class="icon-btn-pill" data-rtl-toggle aria-label="Toggle RTL layout" title="Toggle RTL">
-          <span>LTR / RTL</span>
+        <button class="icon-btn" data-rtl-toggle aria-label="Toggle RTL layout" title="Toggle RTL">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 7h12m0 0l-4-4m4 4l-4 4M16 17H4m0 0l4 4m-4-4l4-4"/>
+          </svg>
         </button>
         <button class="icon-btn" data-theme-toggle aria-label="Toggle dark mode" title="Toggle theme">
           <svg data-moon-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
