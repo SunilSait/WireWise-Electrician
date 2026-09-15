@@ -24,17 +24,30 @@
 </div>
 
 <div class="error-page" role="main">
-  <div style="position:absolute;top:1.5rem;left:50%;transform:translateX(-50%)">
-    <a href="index.html" aria-label="WireWise Home" style="display:inline-flex;align-items:center;gap:0.625rem;text-decoration:none">
-      <svg width="34" height="34" viewBox="0 0 40 40" fill="none">
-        <rect width="40" height="40" rx="10" fill="var(--primary)"/>
-        <path d="M22 8 L14 20 H20 L17 32 L28 18 H22 L26 8 Z" fill="white"/>
+  <!-- Top controls: Theme toggle + RTL toggle -->
+  <div class="coming-top-icons">
+    <button class="icon-btn" data-theme-toggle aria-label="Toggle theme" title="Toggle Theme">
+      <svg data-moon-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg data-sun-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <button class="icon-btn" data-rtl-toggle aria-label="Toggle RTL layout" title="Toggle RTL">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 7h12m0 0l-4-4m4 4l-4 4M16 17H4m0 0l4 4m-4-4l4-4"/>
       </svg>
-      <span style="font-family:'Syne',sans-serif;font-weight:700;font-size:1.0625rem;color:var(--text-dark)">Wire<span style="color:var(--primary)">Wise</span></span>
-    </a>
+    </button>
   </div>
 
   <div class="error-page-inner">
+    <!-- Centered Logo -->
+    <div style="margin-bottom: 2rem; display: flex; justify-content: center; z-index: 2; position: relative;">
+      <a href="index.html" class="navbar-logo" aria-label="WireWise Home">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="10" fill="var(--primary)"/>
+          <path d="M22 8 L14 20 H20 L17 32 L28 18 H22 L26 8 Z" fill="white"/>
+        </svg>
+        <span class="logo-text">Wire<span>Wise</span></span>
+      </a>
+    </div>
     <div class="error-code" aria-hidden="true">404</div>
     <div class="error-content">
       <div class="error-icon">

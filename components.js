@@ -2,6 +2,22 @@
 // Shared navbar and footer injected into every page
 
 (function () {
+  // ── Early State Restore (Theme, Color Accent & RTL) ───
+  try {
+    const savedDir = localStorage.getItem('wirewise-dir');
+    if (savedDir) {
+      document.documentElement.setAttribute('dir', savedDir);
+    }
+    const savedTheme = localStorage.getItem('wirewise-theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+    const savedColor = localStorage.getItem('wirewise-color-theme');
+    if (savedColor) {
+      document.documentElement.setAttribute('data-theme-color', savedColor);
+    }
+  } catch (e) {}
+
   // ── SVG Logo Mark ─────────────────────────────────────
   const logoSVG = `<svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="40" height="40" rx="10" fill="var(--primary)"/>
@@ -27,41 +43,10 @@
       </ul>
 
       <div class="navbar-actions">
-        <!-- Theme palette toggle -->
-        <div class="palette-dropdown-wrap">
-          <button class="icon-btn" id="palette-toggle-btn" aria-label="Change theme accent" title="Theme Color Palette">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
-              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
-              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
-              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
-              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"/>
-            </svg>
-          </button>
-          <div class="palette-dropdown" id="palette-dropdown">
-            <div class="palette-title">Theme Accent</div>
-            <button class="palette-option active" data-color="amber" type="button">
-              <span class="palette-dot amber"></span> Volt Amber (Default)
-            </button>
-            <button class="palette-option" data-color="cyan" type="button">
-              <span class="palette-dot cyan"></span> Cyber Cyan
-            </button>
-            <button class="palette-option" data-color="emerald" type="button">
-              <span class="palette-dot emerald"></span> Emerald Surge
-            </button>
-            <button class="palette-option" data-color="crimson" type="button">
-              <span class="palette-dot crimson"></span> Crimson Spark
-            </button>
-            <button class="palette-option" data-color="blue" type="button">
-              <span class="palette-dot blue"></span> Cobalt Blue
-            </button>
-          </div>
-        </div>
         <!-- RTL toggle -->
         <button class="icon-btn" data-rtl-toggle aria-label="Toggle RTL layout" title="Toggle RTL">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 5h18M3 12h18M3 19h18"/>
-            <path d="M17 8l4 4-4 4"/>
+            <path d="M8 7h12m0 0l-4-4m4 4l-4 4M16 17H4m0 0l4 4m-4-4l4-4"/>
           </svg>
         </button>
         <!-- Dark mode toggle -->
@@ -76,8 +61,7 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
         </button>
-        <a href="emergency.html" class="btn btn-secondary btn-sm">Emergency</a>
-        <a href="contact.html" class="btn btn-primary btn-sm">Book Now</a>
+        <a href="login.html" class="btn btn-primary btn-sm">Login</a>
         <!-- Hamburger -->
         <button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -93,19 +77,8 @@
     <a href="pricing.html" class="nav-link">Pricing</a>
     <a href="emergency.html" class="nav-link">Emergency</a>
     <a href="contact.html" class="nav-link">Contact</a>
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:0.6rem 1rem;background:var(--surface-alt);border-radius:var(--radius-sm);margin:0.25rem 0;">
-      <span style="font-size:0.85rem;font-weight:600;color:var(--text-dark);">Theme Color:</span>
-      <div style="display:flex;gap:0.5rem;">
-        <button class="palette-option" data-color="amber" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Volt Amber"><span class="palette-dot amber"></span></button>
-        <button class="palette-option" data-color="cyan" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Cyber Cyan"><span class="palette-dot cyan"></span></button>
-        <button class="palette-option" data-color="emerald" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Emerald Surge"><span class="palette-dot emerald"></span></button>
-        <button class="palette-option" data-color="crimson" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Crimson Spark"><span class="palette-dot crimson"></span></button>
-        <button class="palette-option" data-color="blue" style="padding:4px;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;" title="Cobalt Blue"><span class="palette-dot blue"></span></button>
-      </div>
-    </div>
     <div class="mobile-menu-actions">
-      <a href="emergency.html" class="btn btn-secondary">Emergency</a>
-      <a href="contact.html" class="btn btn-primary">Book Now</a>
+      <a href="login.html" class="btn btn-primary">Login</a>
     </div>
   </div>`;
 
@@ -203,13 +176,6 @@
   const yr = document.getElementById('footer-year');
   if (yr) yr.textContent = new Date().getFullYear();
 
-  // Inject scroll progress bar
-  if (!document.getElementById('scroll-progress')) {
-    const bar = document.createElement('div');
-    bar.className = 'scroll-progress-bar';
-    bar.id = 'scroll-progress';
-    document.body.prepend(bar);
-  }
 
   // Inject back to top button
   if (!document.getElementById('back-to-top')) {

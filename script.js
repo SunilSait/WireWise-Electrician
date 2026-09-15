@@ -59,13 +59,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // ── RTL ──────────────────────────────────────────────
-  const rtlBtns = document.querySelectorAll('[data-rtl-toggle]');
-  rtlBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
+  // ── RTL Layout & Persistence ──────────────────────────
+  const savedDir = localStorage.getItem('wirewise-dir');
+  if (savedDir) {
+    html.setAttribute('dir', savedDir);
+  }
+
+  document.addEventListener('click', (e) => {
+    const rtlBtn = e.target.closest('[data-rtl-toggle]');
+    if (rtlBtn) {
       const isRtl = html.getAttribute('dir') === 'rtl';
-      html.setAttribute('dir', isRtl ? 'ltr' : 'rtl');
-    });
+      const newDir = isRtl ? 'ltr' : 'rtl';
+      html.setAttribute('dir', newDir);
+      localStorage.setItem('wirewise-dir', newDir);
+    }
   });
 
   // ── Navbar scroll effect ──────────────────────────────
@@ -76,20 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
   }
 
-  // ── Scroll Progress Bar ───────────────────────────────
-  const progressBar = document.getElementById('scroll-progress');
-  function updateScrollProgress() {
-    if (!progressBar) return;
-    const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
-    if (scrollTotal <= 0) {
-      progressBar.style.width = '0%';
-      return;
-    }
-    const progress = (window.scrollY / scrollTotal) * 100;
-    progressBar.style.width = Math.min(Math.max(progress, 0), 100) + '%';
-  }
-  window.addEventListener('scroll', updateScrollProgress, { passive: true });
-  updateScrollProgress();
 
   // ── Back to Top ───────────────────────────────────────
   const backToTopBtn = document.getElementById('back-to-top');
@@ -276,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ── 3D Card Tilt & Specular Cursor Spotlight ───────────
-  const tiltCards = document.querySelectorAll('.service-card, .pricing-card, .testimonial-card, .response-metric, .team-card, .feature-highlight .fh-img');
+  const tiltCards = document.querySelectorAll('.service-card, .pricing-card, .testimonial-card, .response-metric, .team-card, .feature-highlight .fh-img, .contact-image-card');
   tiltCards.forEach(card => {
     card.classList.add('tilt-card');
     if (!card.querySelector('.spotlight-overlay')) {
@@ -504,7 +497,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ── Password toggle ───────────────────────────────────
-  document.querySelectorAll('.password-toggle').forEach(btn => {
+  document.querySelectorAll('.toggle-password, .password-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const wrapper = btn.closest('.input-wrapper');
       const input = wrapper ? wrapper.querySelector('input') : null;
@@ -515,6 +508,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const eyeOff = btn.querySelector('[data-eye-off]');
       if (eyeOpen) eyeOpen.style.display = isPass ? 'none' : 'block';
       if (eyeOff) eyeOff.style.display = isPass ? 'block' : 'none';
+      btn.setAttribute('aria-label', isPass ? 'Hide password' : 'Show password');
     });
   });
 
