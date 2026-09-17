@@ -563,4 +563,164 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // ── Smart Electrical Load & Panel Simulator ───────────
+  function initLoadCalculator() {
+    const calcSection = document.getElementById('load-calculator');
+    if (!calcSection) return;
+
+    const pillBtns = calcSection.querySelectorAll('.calc-pill-btn');
+    const panelBtns = calcSection.querySelectorAll('.calc-panel-btn');
+    const applianceItems = calcSection.querySelectorAll('.calc-appliance-item');
+
+    const totalAmpsEl = document.getElementById('calc-total-amps');
+    const kwValEl = document.getElementById('calc-kw-val');
+    const panelSizeDisplay = document.getElementById('calc-panel-size-display');
+    const necLimitEl = document.getElementById('calc-nec-limit');
+    const utilizationPctEl = document.getElementById('calc-utilization-pct');
+    const radialBar = document.getElementById('calc-radial-bar');
+    const barFill = document.getElementById('calc-bar-fill');
+    const headroomText = document.getElementById('calc-headroom-text');
+    const statusBadge = document.getElementById('calc-status-badge');
+    const statusText = document.getElementById('calc-status-text');
+    const diagCard = document.getElementById('calc-diagnostic-box');
+    const diagIcon = document.getElementById('calc-diag-icon');
+    const diagTitle = document.getElementById('calc-diag-title');
+    const diagDesc = document.getElementById('calc-diag-desc');
+    const bookBtn = document.getElementById('calc-book-assessment');
+
+    const circumference = 2 * Math.PI * 68; // ~427.26
+    if (radialBar) {
+      radialBar.style.strokeDasharray = `${circumference} ${circumference}`;
+    }
+
+    let baseAmps = 50; // medium default
+    let panelCapacity = 100; // 100A default
+
+    pillBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        pillBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        baseAmps = parseInt(btn.dataset.baseAmps, 10) || 50;
+        recalculate();
+      });
+    });
+
+    panelBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        panelBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        panelCapacity = parseInt(btn.dataset.panel, 10) || 100;
+        recalculate();
+      });
+    });
+
+    applianceItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const isActive = item.classList.toggle('active');
+        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        recalculate();
+      });
+    });
+
+    function recalculate() {
+      let applianceSum = 0;
+      applianceItems.forEach(item => {
+        if (item.classList.contains('active')) {
+          const val = parseInt(item.dataset.loadAmps, 10) || 0;
+          applianceSum += val;
+        }
+      });
+
+      const totalAmps = Math.max(15, baseAmps + applianceSum);
+      const totalKw = ((totalAmps * 240) / 1000).toFixed(1);
+      const safeNecLimit = Math.round(panelCapacity * 0.8);
+      const utilization = Math.round((totalAmps / panelCapacity) * 100);
+      const headroom = panelCapacity - totalAmps;
+
+      if (totalAmpsEl) totalAmpsEl.textContent = totalAmps;
+      if (kwValEl) kwValEl.textContent = `~${totalKw} kW Peak Demand`;
+      if (panelSizeDisplay) panelSizeDisplay.textContent = panelCapacity;
+      if (necLimitEl) necLimitEl.textContent = `${safeNecLimit}A Safe Continuous Limit (80%)`;
+      if (utilizationPctEl) utilizationPctEl.textContent = `${utilization}%`;
+
+      if (barFill) {
+        barFill.style.width = `${Math.min(100, utilization)}%`;
+      }
+
+      if (radialBar) {
+        const gaugeRatio = Math.min(1.2, utilization / 100);
+        const offset = circumference - (Math.min(1, gaugeRatio) * circumference);
+        radialBar.style.strokeDashoffset = offset;
+      }
+
+      statusBadge.classList.remove('safe', 'warning', 'danger');
+      diagCard.classList.remove('safe', 'warning', 'danger');
+
+      if (utilization > 95) {
+        statusBadge.classList.add('danger');
+        diagCard.classList.add('danger');
+        if (statusText) statusText.textContent = 'OVERLOAD RISK DETECTED';
+        if (headroomText) headroomText.textContent = `Headroom: Overloaded by ${Math.abs(headroom)}A`;
+        if (radialBar) radialBar.style.stroke = 'var(--accent-red)';
+        if (barFill) barFill.style.backgroundColor = 'var(--accent-red)';
+
+        if (diagIcon) {
+          diagIcon.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+        }
+        if (diagTitle) diagTitle.textContent = `Panel Upgrade Urgently Recommended (${panelCapacity}A Exceeded)`;
+        if (diagDesc) diagDesc.textContent = `Your projected demand (${totalAmps}A) exceeds your panel's rated capacity of ${panelCapacity}A. Breakers will trip frequently and high heat load creates safety hazards. Upgrading to a 200A or 400A smart breaker panel is strongly advised.`;
+        if (bookBtn) {
+          bookBtn.textContent = `Schedule 200A Panel Assessment →`;
+          bookBtn.href = `contact.html?service=panel-upgrade&load=${totalAmps}A`;
+        }
+      } else if (utilization >= 75) {
+        statusBadge.classList.add('warning');
+        diagCard.classList.add('warning');
+        if (statusText) statusText.textContent = 'HIGH LOAD · NEAR 80% LIMIT';
+        if (headroomText) headroomText.textContent = `Headroom: Only ${headroom}A Remaining`;
+        if (radialBar) radialBar.style.stroke = 'var(--primary)';
+        if (barFill) barFill.style.backgroundColor = 'var(--primary)';
+
+        if (diagIcon) {
+          diagIcon.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`;
+        }
+        if (diagTitle) diagTitle.textContent = `Approaching Continuous NEC Safety Threshold (${utilization}%)`;
+        if (diagDesc) diagDesc.textContent = `Your home operates near the 80% continuous threshold (${safeNecLimit}A). Adding another major continuous appliance (like an EV charger or induction stove) will require a 200A service upgrade.`;
+        if (bookBtn) {
+          bookBtn.textContent = `Book Free Panel Capacity Check →`;
+          bookBtn.href = `contact.html?service=panel-check&load=${totalAmps}A`;
+        }
+      } else {
+        statusBadge.classList.add('safe');
+        diagCard.classList.add('safe');
+        if (statusText) statusText.textContent = 'SAFE CAPACITY · HEALTHY';
+        if (headroomText) headroomText.textContent = `Headroom: ${headroom}A Available`;
+        if (radialBar) radialBar.style.stroke = 'var(--accent-green)';
+        if (barFill) barFill.style.backgroundColor = 'var(--accent-green)';
+
+        if (diagIcon) {
+          diagIcon.innerHTML = `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+        }
+        if (diagTitle) diagTitle.textContent = `Panel Capacity Healthy (${utilization}% Utilized)`;
+        if (diagDesc) diagDesc.textContent = `Your ${panelCapacity}A panel has ample headroom (${headroom}A free) to safely handle your current configuration. We recommend adding whole-home surge protection to guard sensitive smart electronics.`;
+        if (bookBtn) {
+          bookBtn.textContent = `Explore Whole-Home Protection →`;
+          bookBtn.href = `contact.html?service=surge-protection&load=${totalAmps}A`;
+        }
+      }
+    }
+
+    recalculate();
+  }
+
+  initLoadCalculator();
+
 });

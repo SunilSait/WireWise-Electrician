@@ -19,7 +19,7 @@
     /* electric SVG line accent */
     .hero2-elec{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
     .hero2-content{position:relative;z-index:3;max-width:800px;padding:1.5rem 1.5rem;}
-    .hero2-title{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(2.4rem,5vw,4.2rem);color:#fff;line-height:1.1;margin-bottom:1.25rem;}
+    .hero2-title{font-family:'Syne',sans-serif;font-weight:600;font-size:clamp(2rem,3.2vw,2.75rem);color:#fff;line-height:1.16;margin-bottom:1.25rem;}
     .hero2-title span{color:var(--primary-light);}
     .hero2-sub{font-size:1.0625rem;color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 1.75rem;font-weight:400;line-height:1.7;}
     .hero2-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
@@ -69,10 +69,62 @@
     .cert-desc{font-size:0.85rem;color:var(--text-muted);font-weight:400;}
 
     /* Blog section identical to shared */
-    /* Stacked testimonial */
-    .testimonial-stack{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem;}
-    .testimonial-stacked{background:var(--surface-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;transition:var(--transition);}
-    .testimonial-stacked:hover{box-shadow:var(--shadow-md);}
+    /* Stacked testimonial & Process section — reduced right/left padding */
+    .process-section-h2 .container,
+    .reviews-section-h2 .container {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+    .process-timeline-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    .process-section-h2 .timeline-item {
+      grid-template-columns: 64px 1fr;
+      gap: 1.25rem;
+    }
+    .testimonial-stack {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+    .testimonial-stacked {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem 1.25rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: var(--transition);
+    }
+    .testimonial-stacked:hover { box-shadow: var(--shadow-md); }
+    @media (max-width: 640px) {
+      .process-section-h2 .container,
+      .reviews-section-h2 .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .process-timeline-wrap,
+      .testimonial-stack {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+      }
+      .testimonial-stacked {
+        padding: 1.15rem 0.85rem;
+        gap: 0.85rem;
+      }
+      .process-section-h2 .timeline-item {
+        grid-template-columns: 48px 1fr;
+        gap: 0.85rem;
+      }
+    }
     .ts-avatar{width:54px;height:54px;border-radius:50%;background:var(--primary-bg);border:2px solid var(--primary);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--primary);flex-shrink:0;object-fit:cover;overflow:hidden;}
     .ts-content{}
     .ts-name{font-weight:600;color:var(--text-dark);}
@@ -252,134 +304,244 @@
   </div>
 </section>
 
-<!-- ===== CERTIFICATIONS & VERIFIED CREDENTIALS (V3 BENTO) ===== -->
-<section class="section cert-section-v3 bg-surface-alt" aria-labelledby="certifications-heading">
+<!-- ===== SMART ELECTRICAL LOAD & PANEL SIZING SIMULATOR ===== -->
+<section class="section load-calc-section" id="load-calculator" aria-labelledby="load-calc-heading">
   <div class="container">
     <div class="section-header center reveal">
-      <span class="cert-badge-v2">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        VERIFIED ACCREDITATION MATRIX
+      <span class="calc-badge-simple">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Instant Load Estimator
       </span>
-      <h2 class="section-title" id="certifications-heading">Official Certifications & Safety Accreditation</h2>
-      <p class="section-subtitle">Every WireWise electrician is master-certified, state-licensed, and background-vetted for guaranteed home safety.</p>
-    </div>
-    
-    <div class="cert-bento-grid reveal">
-      <!-- Bento Hero Featured Tile (Spans 2 Rows) -->
-      <div class="bento-hero-tile">
-        <div>
-          <div class="bento-hero-badge">● MASTER CODE CERTIFIED</div>
-          <div class="bento-hero-icon">
-            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3 class="bento-hero-title">NEC 2026 National Code Certification</h3>
-          <p class="bento-hero-desc">Our master electricians strictly adhere to National Electrical Code (NEC) safety standards for load calculation, grounding, and residential wiring.</p>
-
-          <div class="bento-hero-list">
-            <div class="bento-hero-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              100% NEC Code Compliance Guaranteed
-            </div>
-            <div class="bento-hero-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              Zero-Defect Inspection Protocols
-            </div>
-            <div class="bento-hero-item">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-              Annual Safety Audit Sign-Off
-            </div>
-          </div>
-        </div>
-        <div class="bento-footer-tag">
-          <span>Standards Compliance</span>
-          <span>Active Master Tier</span>
-        </div>
-      </div>
-
-      <!-- Bento Tile 2: OSHA 30 -->
-      <div class="bento-card">
-        <div class="bento-card-header">
-          <div class="bento-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <span class="cert-status-pill-v2 green">FEDERAL</span>
-        </div>
-        <h3 class="bento-card-title">OSHA 30 Safety </h3>
-        <p class="bento-card-desc">30-Hour OSHA certified technicians practicing zero-hazard workplace protocols.</p>
-        <div class="bento-footer-tag">
-          <span>Workplace Safety</span>
-          <span>Zero Hazard</span>
-        </div>
-      </div>
-
-      <!-- Bento Tile 3: State License -->
-      <div class="bento-card">
-        <div class="bento-card-header">
-          <div class="bento-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <span class="cert-status-pill-v2 green">LICENSE</span>
-        </div>
-        <h3 class="bento-card-title">State License & $2M</h3>
-        <p class="bento-card-desc">Fully bonded with $2,000,000 general liability coverage for complete peace of mind.</p>
-        <div class="bento-footer-tag">
-          <span> #EC-984021</span>
-          <span> Insured</span>
-        </div>
-      </div>
-
-      <!-- Bento Tile 4: BBB A+ Rating -->
-      <div class="bento-card">
-        <div class="bento-card-header">
-          <div class="bento-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-          </div>
-          <span class="cert-status-pill-v2 amber">★ A+ BBB</span>
-        </div>
-        <h3 class="bento-card-title">BBB A+ Accredited</h3>
-        <p class="bento-card-desc">Recognized with highest BBB rating for transparent pricing and stellar customer satisfaction.</p>
-        <div class="bento-footer-tag">
-          <span>Customer Score</span>
-          <span>99.4% Approved</span>
-        </div>
-      </div>
-
-      <!-- Bento Tile 5: IEEE & EV Smart Grid -->
-      <div class="bento-card">
-        <div class="bento-card-header">
-          <div class="cert-icon-v2" style="width:44px;height:44px;">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <span class="cert-status-pill-v2 blue">IEEE / EV</span>
-        </div>
-        <h3 class="bento-card-title">IEEE Surge & EV Ready</h3>
-        <p class="bento-card-desc">Certified Level 2 EV Charger & Tesla Wall Connector installers with whole-house surge protection.</p>
-        <div class="bento-footer-tag">
-          <span>Smart Grid</span>
-          <span>Tesla Certified</span>
-        </div>
-      </div>
+      <h2 class="section-title" id="load-calc-heading">Electrical Load &amp; Panel Calculator</h2>
+      <p class="section-subtitle">Quickly evaluate whether your electrical panel can safely handle your home's total power demands.</p>
     </div>
 
-    <!-- License Toolbar -->
-    <div class="license-bar-v3 reveal">
-      <div class="license-bar-v3-left">
-        <div class="license-bar-v3-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div class="calc-grid reveal">
+      <!-- Left: Configurator Form -->
+      <div class="calc-card calc-config">
+        <!-- Step 1: Home Size -->
+        <div class="calc-step">
+          <div class="calc-step-header">
+            <span class="calc-step-num">1</span>
+            <div class="calc-step-meta">
+              <h3 class="calc-step-title">Home Size</h3>
+              <span class="calc-step-hint">Baseline lighting, outlets &amp; standard appliances</span>
+            </div>
+          </div>
+          <div class="calc-segmented-grid" role="group" aria-label="Select home square footage">
+            <button type="button" class="calc-pill-btn" data-home-size="compact" data-base-amps="35" aria-pressed="false">
+              <span class="pill-title">&lt; 1,500 sq ft</span>
+              <span class="pill-meta">35A Base</span>
+            </button>
+            <button type="button" class="calc-pill-btn active" data-home-size="medium" data-base-amps="50" aria-pressed="true">
+              <span class="pill-title">1,500 – 2,800 sq ft</span>
+              <span class="pill-meta">50A Base</span>
+            </button>
+            <button type="button" class="calc-pill-btn" data-home-size="large" data-base-amps="75" aria-pressed="false">
+              <span class="pill-title">2,800 – 4,500 sq ft</span>
+              <span class="pill-meta">75A Base</span>
+            </button>
+            <button type="button" class="calc-pill-btn" data-home-size="estate" data-base-amps="105" aria-pressed="false">
+              <span class="pill-title">4,500+ sq ft</span>
+              <span class="pill-meta">105A Base</span>
+            </button>
+          </div>
         </div>
-        <div>
-          <h4>Verify Our Master Electrical Credentials</h4>
-          <p>License #EC-984021-B — Active State Registration & Board Accreditation</p>
+
+        <!-- Step 2: Main Panel Rating -->
+        <div class="calc-step">
+          <div class="calc-step-header">
+            <span class="calc-step-num">2</span>
+            <div class="calc-step-meta">
+              <h3 class="calc-step-title">Current Electrical Panel</h3>
+              <span class="calc-step-hint">Check your main breaker switch rating</span>
+            </div>
+          </div>
+          <div class="calc-panel-grid" role="group" aria-label="Select main electrical panel size">
+            <button type="button" class="calc-panel-btn active" data-panel="100" aria-pressed="true">
+              <span class="panel-rating">100 A</span>
+              <span class="panel-label">Older Standard</span>
+            </button>
+            <button type="button" class="calc-panel-btn" data-panel="150" aria-pressed="false">
+              <span class="panel-rating">150 A</span>
+              <span class="panel-label">Mid-Size</span>
+            </button>
+            <button type="button" class="calc-panel-btn" data-panel="200" aria-pressed="false">
+              <span class="panel-rating">200 A</span>
+              <span class="panel-label">Modern Standard</span>
+            </button>
+            <button type="button" class="calc-panel-btn" data-panel="400" aria-pressed="false">
+              <span class="panel-rating">400 A</span>
+              <span class="panel-label">Heavy Duty</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: High-Demand Appliance Toggles -->
+        <div class="calc-step">
+          <div class="calc-step-header">
+            <span class="calc-step-num">3</span>
+            <div class="calc-step-meta">
+              <h3 class="calc-step-title">High-Draw Appliances &amp; Upgrades</h3>
+              <span class="calc-step-hint">Toggle installed or planned electrical loads</span>
+            </div>
+          </div>
+          <div class="calc-appliance-grid">
+            <!-- Item 1: EV Charger -->
+            <button type="button" class="calc-appliance-item active" data-load-amps="40" data-load-name="EV Level 2 Charger" aria-pressed="true">
+              <div class="appliance-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+              </div>
+              <div class="appliance-info">
+                <span class="appliance-title">Level 2 EV Charger</span>
+                <span class="appliance-amps">+40 Amps</span>
+              </div>
+              <span class="appliance-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </button>
+
+            <!-- Item 2: Heat Pump HVAC -->
+            <button type="button" class="calc-appliance-item active" data-load-amps="30" data-load-name="Heat Pump HVAC" aria-pressed="true">
+              <div class="appliance-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+              </div>
+              <div class="appliance-info">
+                <span class="appliance-title">Heat Pump / AC</span>
+                <span class="appliance-amps">+30 Amps</span>
+              </div>
+              <span class="appliance-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </button>
+
+            <!-- Item 3: Induction Cooktop -->
+            <button type="button" class="calc-appliance-item" data-load-amps="40" data-load-name="Induction Range" aria-pressed="false">
+              <div class="appliance-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><circle cx="8" cy="16" r="3"/><circle cx="16" cy="16" r="3"/><rect x="2" y="2" width="20" height="20" rx="3"/></svg>
+              </div>
+              <div class="appliance-info">
+                <span class="appliance-title">Induction Stove &amp; Oven</span>
+                <span class="appliance-amps">+40 Amps</span>
+              </div>
+              <span class="appliance-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </button>
+
+            <!-- Item 4: Hybrid Water Heater -->
+            <button type="button" class="calc-appliance-item" data-load-amps="25" data-load-name="Electric Water Heater" aria-pressed="false">
+              <div class="appliance-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              </div>
+              <div class="appliance-info">
+                <span class="appliance-title">Electric Water Heater</span>
+                <span class="appliance-amps">+25 Amps</span>
+              </div>
+              <span class="appliance-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </button>
+
+            <!-- Item 5: Pool & Spa -->
+            <button type="button" class="calc-appliance-item" data-load-amps="45" data-load-name="Hot Tub & Pool Spa" aria-pressed="false">
+              <div class="appliance-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><path d="M20 12v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-5"/><path d="M7 6v2"/><path d="M12 4v4"/><path d="M17 6v2"/></svg>
+              </div>
+              <div class="appliance-info">
+                <span class="appliance-title">Hot Tub / Pool Spa</span>
+                <span class="appliance-amps">+45 Amps</span>
+              </div>
+              <span class="appliance-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </button>
+
+            <!-- Item 6: Solar & Storage Offset -->
+            <button type="button" class="calc-appliance-item offset-item" data-load-amps="-25" data-load-name="Solar & Battery Storage" aria-pressed="false">
+              <div class="appliance-icon offset-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              </div>
+              <div class="appliance-info">
+                <span class="appliance-title">Solar &amp; Battery Storage</span>
+                <span class="appliance-amps green-text">-25A Offset</span>
+              </div>
+              <span class="appliance-check"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </button>
+          </div>
         </div>
       </div>
-      <a href="contact.html" class="btn btn-primary btn-sm">Request Credential Verification →</a>
+
+      <!-- Right: Live Diagnostic Results Dashboard -->
+      <div class="calc-card calc-summary">
+        <div class="calc-summary-top">
+          <span class="calc-summary-label">Estimated System Status</span>
+          <div class="calc-status-badge" id="calc-status-badge">
+            <span class="status-pulse-dot"></span>
+            <span id="calc-status-text">ANALYZING LOAD</span>
+          </div>
+        </div>
+
+        <!-- Main Readout -->
+        <div class="calc-hero-metric">
+          <div class="calc-amps-display">
+            <span class="calc-big-num" id="calc-total-amps">120</span>
+            <span class="calc-big-unit">Amps Total Load</span>
+          </div>
+          <div class="calc-capacity-pill">
+            <span class="pct-val" id="calc-utilization-pct">120%</span>
+            <span class="pct-lbl">of <span id="calc-panel-size-display">100</span>A Panel</span>
+          </div>
+        </div>
+
+        <!-- Linear Capacity Bar -->
+        <div class="calc-bar-wrap">
+          <div class="calc-bar-meta">
+            <span id="calc-headroom-text">Headroom: Overloaded by 20A</span>
+            <span class="nec-marker-tag">80% NEC Safe Limit</span>
+          </div>
+          <div class="calc-bar-track">
+            <div class="calc-bar-fill" id="calc-bar-fill" style="width: 100%;"></div>
+            <div class="calc-bar-marker" style="left: 80%;"></div>
+          </div>
+        </div>
+
+        <!-- Compact Spec Stats -->
+        <div class="calc-spec-grid">
+          <div class="calc-spec-item">
+            <span class="spec-k">Peak Power</span>
+            <span class="spec-v" id="calc-kw-val">~28.8 kW Peak</span>
+          </div>
+          <div class="calc-spec-item">
+            <span class="spec-k">Safe Continuous Limit</span>
+            <span class="spec-v" id="calc-nec-limit">80A Continuous (80%)</span>
+          </div>
+        </div>
+
+        <!-- Diagnostic Feedback Card -->
+        <div class="calc-diagnostic-card" id="calc-diagnostic-box">
+          <div class="diag-icon-col" id="calc-diag-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="diag-text-col">
+            <h4 id="calc-diag-title">Service Panel Upgrade Strongly Recommended</h4>
+            <p id="calc-diag-desc">Your projected demand exceeds your 100A panel rating. Operating over continuous thresholds creates fire risk and frequent breaker trips.</p>
+          </div>
+        </div>
+
+        <!-- IRA Rebate Box (Simplified & subtle) -->
+        <div class="calc-rebate-simple">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Eligible for up to <strong>$4,000</strong> in Federal IRA Panel &amp; Wiring credits.</span>
+        </div>
+
+        <!-- CTA actions -->
+        <div class="calc-cta-group">
+          <a href="contact.html?service=panel-upgrade" class="btn btn-primary btn-lg calc-action-btn" id="calc-book-assessment">
+            Schedule Free Panel Assessment →
+          </a>
+          <a href="tel:+18005559473" class="calc-phone-link" id="calc-call-expert">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.08.96.26 1.9.55 2.81a2 2 0 0 1-.45 2.11L7.91 8.9a16 16 0 0 0 5.18 5.18l1-1.27a2 2 0 0 1 2.11-.45c.91.29 1.85.47 2.81.55A2 2 0 0 1 22 16.92z"/></svg>
+            Speak with an Electrician: (800) 555-WIRE
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-
 <!-- ===== VERTICAL PROCESS TIMELINE ===== -->
-<section class="section" aria-labelledby="process2-heading">
+<section class="section process-section-h2" aria-labelledby="process2-heading">
   <div class="container">
     <div class="section-header center reveal">
       <span class="section-label">Our Process</span>
@@ -387,7 +549,7 @@
       <h2 class="section-title" id="process2-heading">How We Deliver Flawless Results</h2>
       <p class="section-subtitle">A structured, transparent workflow that keeps you informed at every stage.</p>
     </div>
-    <div style="max-width:680px;margin:0 auto">
+    <div class="process-timeline-wrap">
       <div class="timeline-vertical">
         <div class="timeline-item reveal">
           <div class="timeline-left">
@@ -487,7 +649,7 @@
 
 
 <!-- ===== STACKED TESTIMONIALS ===== -->
-<section class="section" aria-labelledby="testi2-heading">
+<section class="section reviews-section-h2" aria-labelledby="testi2-heading">
 
   <div class="container">
     <div class="section-header center reveal">
