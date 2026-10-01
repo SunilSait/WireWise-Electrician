@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book an electrician online with WireWise. Schedule residential and commercial electrical repair, wiring, panel upgrades, and safety inspections.">
+  <title>Book an Electrician | WireWise</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23F59E0B'/%3E%3Cpath d='M22 8 L14 20 H20 L17 32 L28 18 H22 L26 8 Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="navbar-container"></div>
+
+<!-- Page Hero -->
+<div class="page-hero" role="banner">
+  <img src="assets/booking_hero.jpg" alt="WireWise friendly certified electrician with schedule tablet ready to book an appointment">
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      <span class="current">Book an Electrician</span>
+    </nav>
+    <h1>Book an Electrician</h1>
+    <p>Schedule your electrical service in under two minutes. Licensed electricians, upfront pricing, and guaranteed on-time arrival.</p>
+  </div>
+</div>
+
+<!-- Booking Section -->
+<section class="booking-section" aria-labelledby="booking-heading">
+  <div class="container">
+    <!-- Interactive Form (2-column layout) -->
+    <form id="booking-form" aria-label="Electrician Booking Form">
+      <div class="booking-grid">
+        <!-- Left Column: Steps 1, 2, 3 as Separate Cards -->
+        <div class="booking-main reveal-left">
+          <!-- Step 1: Contact Details Card -->
+          <div class="booking-card">
+            <div style="margin-bottom:1.75rem">
+              <span class="section-label">Online Scheduling</span>
+              <h2 id="booking-heading" style="font-family:'Syne',sans-serif;font-size:1.75rem;margin-top:0.25rem;margin-bottom:0.5rem">Service Booking Details</h2>
+              <p style="color:var(--text-muted);font-size:0.95rem;font-weight:400;margin:0">Provide your service and location details. We will confirm your technician within 30 minutes.</p>
+            </div>
+
+            <div class="booking-step-header">
+              <span class="booking-step-badge">1</span>
+              <h3 class="booking-step-title">Your Contact Information</h3>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="booking-fname">First Name <span style="color:var(--accent-red)">*</span></label>
+                <input class="form-control" type="text" id="booking-fname" name="fname" placeholder="John" required autocomplete="given-name">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="booking-lname">Last Name <span style="color:var(--accent-red)">*</span></label>
+                <input class="form-control" type="text" id="booking-lname" name="lname" placeholder="Smith" required autocomplete="family-name">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label" for="booking-phone">Phone Number <span style="color:var(--accent-red)">*</span></label>
+                <input class="form-control" type="tel" id="booking-phone" name="phone" placeholder="+1 (555) 000-0000" required autocomplete="tel">
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label" for="booking-email">Email Address <span style="color:var(--accent-red)">*</span></label>
+                <input class="form-control" type="email" id="booking-email" name="email" placeholder="john@example.com" required autocomplete="email">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Service Location Card -->
+          <div class="booking-card">
+            <div class="booking-step-header">
+              <span class="booking-step-badge">2</span>
+              <h3 class="booking-step-title">Service Address</h3>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="booking-address">Street Address <span style="color:var(--accent-red)">*</span></label>
+              <input class="form-control" type="text" id="booking-address" name="address" placeholder="123 Main Street, Apt 4B" required autocomplete="street-address">
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label" for="booking-city">City <span style="color:var(--accent-red)">*</span></label>
+                <input class="form-control" type="text" id="booking-city" name="city" placeholder="New York" required autocomplete="address-level2">
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label" for="booking-zip">ZIP / Postal Code <span style="color:var(--accent-red)">*</span></label>
+                <input class="form-control" type="text" id="booking-zip" name="zip" placeholder="10001" required autocomplete="postal-code">
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Service Selection Card -->
+          <div class="booking-card">
+            <div class="booking-step-header">
+              <span class="booking-step-badge">3</span>
+              <h3 class="booking-step-title">Select Service & Urgency</h3>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="booking-service">Service Needed <span style="color:var(--accent-red)">*</span></label>
+              <select class="form-control" id="booking-service" name="service" required>
+                <option value="" disabled selected>Choose a service...</option>
+                <option value="wiring">Home Wiring & Rewiring</option>
+                <option value="breaker">Circuit Breaker Replacement / Repair</option>
+                <option value="lighting">Lighting Installation & Fixtures</option>
+                <option value="fan">Ceiling Fan & Exhaust Setup</option>
+                <option value="panel">200A Electrical Panel Upgrade</option>
+                <option value="switchboard">Switchboard & Outlet Repair</option>
+                <option value="ev">EV Charger & Smart Home Installation</option>
+                <option value="inspection">Comprehensive Electrical Safety Inspection</option>
+                <option value="emergency">Emergency Electrical Repair</option>
+                <option value="other">Other Electrical Service / Consultation</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label" for="booking-urgency">Urgency Level</label>
+              <select class="form-control" id="booking-urgency" name="urgency">
+                <option value="standard" selected>Standard (Next few days)</option>
+                <option value="urgent">Urgent (Within 24 hours)</option>
+                <option value="emergency">Immediate Emergency Dispatch</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: The WireWise Promise at top, Step 4 & Submit Button moved down -->
+        <div class="booking-sidebar reveal-right">
+          <!-- Trust & Guarantees Card (Top on desktop, bottom on tablet/mobile) -->
+          <div class="booking-sidebar-card">
+            <h3 style="font-family:'Syne',sans-serif;font-size:1.2rem;margin-bottom:1.25rem">The WireWise Promise</h3>
+
+            <div class="booking-benefit-item">
+              <div class="booking-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div>
+                <div class="booking-benefit-title">30-Minute Fast Response</div>
+                <p class="booking-benefit-desc">We confirm bookings rapidly and provide real-time technician arrival notifications.</p>
+              </div>
+            </div>
+
+            <div class="booking-benefit-item">
+              <div class="booking-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div>
+                <div class="booking-benefit-title">Licensed Master Electricians</div>
+                <p class="booking-benefit-desc">Fully background-checked, insured, and certified with strict adherence to NEC safety codes.</p>
+              </div>
+            </div>
+
+            <div class="booking-benefit-item">
+              <div class="booking-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+              <div>
+                <div class="booking-benefit-title">Upfront Transparent Pricing</div>
+                <p class="booking-benefit-desc">No hidden diagnostic fees or hourly surprises. Clear written estimate before work begins.</p>
+              </div>
+            </div>
+
+            <div class="booking-benefit-item">
+              <div class="booking-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              </div>
+              <div>
+                <div class="booking-benefit-title">100% Satisfaction Guarantee</div>
+                <p class="booking-benefit-desc">Includes a comprehensive 1-year warranty on all residential parts and electrical craftsmanship.</p>
+              </div>
+            </div>
+
+            <div class="booking-benefit-item">
+              <div class="booking-benefit-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <div>
+                <div class="booking-benefit-title">Clean Work & Zero Mess</div>
+                <p class="booking-benefit-desc">Protective shoe covers, drop cloths, and 100% spotless cleanup guaranteed before we depart.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 Card (Moved Down) -->
+          <div class="booking-card">
+            <div class="booking-group" style="margin-bottom:1.5rem">
+              <div class="booking-step-header">
+                <span class="booking-step-badge">4</span>
+                <h3 class="booking-step-title">Preferred Date & Time</h3>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="booking-date">Preferred Date <span style="color:var(--accent-red)">*</span></label>
+                <input class="form-control" type="date" id="booking-date" name="date" required autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="booking-time">Preferred Time Window <span style="color:var(--accent-red)">*</span></label>
+                <select class="form-control" id="booking-time" name="time" required>
+                  <option value="" disabled selected>Choose a time window...</option>
+                  <option value="morning">Morning (8:00 AM – 11:00 AM)</option>
+                  <option value="midday">Midday (11:00 AM – 2:00 PM)</option>
+                  <option value="afternoon">Afternoon (2:00 PM – 5:00 PM)</option>
+                  <option value="evening">Evening (5:00 PM – 8:00 PM)</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label" for="booking-notes">Job Details / Symptoms</label>
+                <textarea class="form-control" id="booking-notes" name="notes" placeholder="Describe the issue, number of rooms, or special requests..." rows="4"></textarea>
+              </div>
+            </div>
+
+            <!-- Submission Button -->
+            <button type="submit" id="booking-submit-btn" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;padding:1rem;font-size:1.05rem">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              Confirm Booking Request
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Success Confirmation State (Hidden initially) -->
+    <div id="booking-success-box" class="booking-card booking-success-box" style="max-width:680px;margin:0 auto;" aria-live="polite">
+      <div class="booking-success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2 style="font-family:'Syne',sans-serif;font-size:1.75rem;margin-bottom:0.5rem">Booking Request Received!</h2>
+      <p style="color:var(--text-muted);font-size:1rem;margin-bottom:1.5rem">
+        Thank you, <strong id="success-customer-name" style="color:var(--text-dark)">Customer</strong>! Your appointment request has been scheduled with WireWise.
+      </p>
+
+      <div class="booking-summary-pill">
+        <div class="booking-summary-pill-row">
+          <span class="label">Reference ID:</span>
+          <span class="val" id="success-ref-num">#WW-8492</span>
+        </div>
+        <div class="booking-summary-pill-row">
+          <span class="label">Service:</span>
+          <span class="val" id="success-service-name">Home Wiring</span>
+        </div>
+        <div class="booking-summary-pill-row">
+          <span class="label">Date & Window:</span>
+          <span class="val" id="success-datetime">Oct 2, 2026 (Morning)</span>
+        </div>
+        <div class="booking-summary-pill-row">
+          <span class="label">Location:</span>
+          <span class="val" id="success-address">123 Main St, New York</span>
+        </div>
+        <div class="booking-summary-pill-row">
+          <span class="label">Status:</span>
+          <span class="val" style="color:var(--accent-green)">Pending Dispatch Confirmation</span>
+        </div>
+      </div>
+
+      <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:1.75rem">
+        A certified WireWise dispatcher will call or text your phone within <strong>30 minutes</strong> to confirm technician arrival.
+      </p>
+
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+        <button type="button" class="btn btn-primary" id="btn-book-another">Book Another Service</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-container"></div>
+<script src="components.js"></script>
+<script src="script.js"></script>
+
+<script>
+  // Booking Page Interactive Controller
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('booking-form');
+    const successBox = document.getElementById('booking-success-box');
+    const dateInput = document.getElementById('booking-date');
+    const serviceSelect = document.getElementById('booking-service');
+    const btnBookAnother = document.getElementById('btn-book-another');
+
+    // 1. Set minimum selectable date to today
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+    }
+
+    // 2. Pre-select service from URL parameter (e.g., booking.html?service=wiring)
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get('service');
+    if (serviceParam && serviceSelect) {
+      for (let i = 0; i < serviceSelect.options.length; i++) {
+        if (serviceSelect.options[i].value.toLowerCase().includes(serviceParam.toLowerCase())) {
+          serviceSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // 3. Handle Form Submission with Interactive Confirmation State
+    if (form && successBox) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('booking-submit-btn');
+        const origText = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="spin-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin 0.8s linear infinite;margin-right:8px">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+            <path d="M12 2a10 10 0 0 1 10 10"></path>
+          </svg>
+          Scheduling Appointment...
+        `;
+
+        // Simulate fast booking network response
+        setTimeout(() => {
+          const fname = document.getElementById('booking-fname').value.trim();
+          const lname = document.getElementById('booking-lname').value.trim();
+          const selectedServiceText = serviceSelect.options[serviceSelect.selectedIndex]?.text || 'General Electrical';
+          const dateVal = dateInput.value;
+          const timeSelect = document.getElementById('booking-time');
+          const timeText = timeSelect.options[timeSelect.selectedIndex]?.text || '';
+          const addressVal = document.getElementById('booking-address').value.trim();
+          const cityVal = document.getElementById('booking-city').value.trim();
+
+          // Generate reference number
+          const refNum = '#WW-' + Math.floor(1000 + Math.random() * 9000);
+
+          // Populate success box
+          document.getElementById('success-customer-name').textContent = fname || 'Valued Customer';
+          document.getElementById('success-ref-num').textContent = refNum;
+          document.getElementById('success-service-name').textContent = selectedServiceText;
+          document.getElementById('success-datetime').textContent = `${dateVal || 'Selected Date'} (${timeText.split('(')[0].trim() || 'Daytime'})`;
+          document.getElementById('success-address').textContent = `${addressVal}${cityVal ? ', ' + cityVal : ''}`;
+
+          // Transition states
+          form.style.display = 'none';
+          successBox.style.display = 'block';
+
+          // Smooth scroll to card
+          const card = document.querySelector('.booking-card');
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origText;
+        }, 800);
+      });
+    }
+
+    // 4. "Book Another Service" reset handler
+    if (btnBookAnother && form && successBox) {
+      btnBookAnother.addEventListener('click', () => {
+        form.reset();
+        successBox.style.display = 'none';
+        form.style.display = 'block';
+        if (dateInput) {
+          dateInput.min = new Date().toISOString().split('T')[0];
+        }
+      });
+    }
+  });
+</script>
+</body>
+</html>

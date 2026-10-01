@@ -61,7 +61,7 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
         </button>
-        <a href="login.html" class="btn btn-primary btn-sm">Login</a>
+        <a href="booking.html" class="btn btn-primary btn-sm" id="nav-cta-btn">Book Now</a>
         <!-- Hamburger -->
         <button class="hamburger" id="hamburger-btn" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -95,7 +95,7 @@
     </div>
 
     <div class="mobile-drawer-footer">
-      <a href="login.html" class="btn btn-primary btn-full">Login</a>
+      <a href="booking.html" class="btn btn-primary btn-full" id="mobile-cta-btn">Book an Electrician</a>
       <div class="mobile-drawer-controls">
         <button class="icon-btn" data-rtl-toggle aria-label="Toggle RTL layout" title="Toggle RTL">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -195,7 +195,7 @@
         <a href="coming-soon.html">Privacy Policy</a>
         <a href="coming-soon.html">Terms of Service</a>
         <a href="404.html">Sitemap</a>
-        <a href="login.html">Login</a>
+        <a href="booking.html">Book Service</a>
       </div>
     </div>
   </footer>`;
